@@ -41,7 +41,7 @@ ReactDOM.render(
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={RequireAuth(Profile)} />
             <Route path="/settings" component={RequireAuth(Settings)} />
-            <Route path="/flashpage" component={RequireAuth(flashpage)} />
+            <Route path="/flashpage" component={flashpage} />
             <Route component={NoMatch} />
           </Switch>
         </div>
