@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default () => (
-  <div>
+  <div>    
     {/*Main jumbotron for a primary marketing message or call to action*/}
     <div className="jumbotron">
-      <h1 className="display-3">Welcome to Rural_Company</h1>
+      <h1 className="display-5">Do work and Get your work done</h1>
       {/* <p>This is a MERN stack based fully functioning blog system. Here, you can share your experience and ideas with other people.</p> */}
       {/* <p><Link className="btn btn-primary btn-lg" to="/posts" role="button">Look the blog posts &raquo;</Link></p> */}
     </div>
+    <h1>Welcome</h1>
 
     {/*Example row of columns*/}
     {/* <div className="row text-justify">
