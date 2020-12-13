@@ -13,7 +13,7 @@
     "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.13",
     "redux": "^3.7.1",
-    "redux-form": "^7.0.4",
+    "redux-form": "^7.4.3",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
@@ -22,5 +22,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "author": "CVRR"
+  "author": "CVRR",
+  "devDependencies": {
+    "css-loader": "^5.0.1",
+    "less": "^3.13.0",
+    "less-loader": "^7.1.0",
+    "style-loader": "^2.0.0"
+  }
 }

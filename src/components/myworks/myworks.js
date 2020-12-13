@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 //import axios from "axios";
-import axios from "../services/Axios";
-import WorkList from "../components/work.jsx";
+import axios from "../../services/Axios";
+import WorkList from "./work.jsx";
 
-class Works extends Component {
+class myWorks extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,9 +16,9 @@ class Works extends Component {
   componentDidMount() {
     const { allworks } = this.state;
     axios
-      .get(`work`) // axios returns a promise
+      .get(`/workbyuid/${localStorage.getItem("uid")}`) // axios returns a promise
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         this.setState({ allworks: response.data });
       })
       .catch(({ response }) => {});
@@ -40,4 +40,4 @@ class Works extends Component {
     );
   }
 }
-export default Works;
+export default myWorks;

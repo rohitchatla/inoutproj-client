@@ -8,13 +8,17 @@ import reduxThunk from "redux-thunk";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import NoMatch from "./components/nomatch";
-import Welcome from "./components/welcome";
+import Welcome from "./components/welcome"; //allworks
 import Signin from "./components/auth/signin";
 import Signup from "./components/auth/signup";
 import RequireAuth from "./components/auth/require_auth";
 import Profile from "./components/userinfo/profile";
 import Settings from "./components/userinfo/settings";
 import flashpage from "./components/flashpage";
+import addwork from "./components/works/addwork";
+import myworks from "./components/myworks/myworks";
+import agentform from "./components/agent/agentform";
+import workdetails from "./components/works/workdetails";
 
 import reducers from "./reducers";
 import { AUTH_USER } from "./actions/types";
@@ -42,6 +46,13 @@ ReactDOM.render(
             <Route path="/profile" component={RequireAuth(Profile)} />
             <Route path="/settings" component={RequireAuth(Settings)} />
             <Route path="/flashpage" component={flashpage} />
+            <Route path="/addwork" component={RequireAuth(addwork)} />
+            <Route path="/myworks" component={RequireAuth(myworks)} />
+            <Route path="/agentform" component={RequireAuth(agentform)} />
+            <Route
+              path="/workdetails/:id"
+              component={RequireAuth(workdetails)}
+            />
             <Route component={NoMatch} />
           </Switch>
         </div>

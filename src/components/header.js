@@ -36,6 +36,15 @@ class Header extends Component {
             <Link className="dropdown-item" to="/settings">
               Settings
             </Link>
+            <Link className="dropdown-item" to="/addwork">
+              Add Work
+            </Link>
+            <Link className="dropdown-item" to="/myworks">
+              My Works
+            </Link>
+            <Link className="dropdown-item" to="/agentform">
+              Apply tobe agent
+            </Link>
             <Link
               className="dropdown-item"
               to="/"
@@ -81,7 +90,7 @@ class Header extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           <Link className="navbar-brand" to="/">
-            RuralCompany
+            Workify
           </Link>
 
           <div
@@ -91,7 +100,7 @@ class Header extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/flashpage">
-                  Something
+                  Services
                 </Link>
               </li>
               <li className="nav-item">
@@ -99,7 +108,7 @@ class Header extends Component {
                   className="nav-link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://github.com/rohitchatla"
+                  href="https://github.com/rohitchatla/inoutproj-client/tree/master"
                 >
                   GitHub
                 </a>
@@ -134,7 +143,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { verifyJwt, signoutUser })(Header);
-
-/**
- * todo: A bug need to be fixed - After updating user profile, you navigate to another page (i.e., www.google.com). If you click the go back button on the browser, the username on header is incorrect.
- */
