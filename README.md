@@ -17,4 +17,4 @@
 ### Unique Features
 * Any user can apply as a worker and different levels of verfication gets done based on the work type.
 * Users can see all available willing workers and can select based on workers rating, cost, skill level.
-### This is frontend repo of our web app.[backend repo is Here]*(https://github.com/rohitchatla/inoutproj-server/tree/master)
+### This is frontend repo of our web app.[backend repo is Here](#https://github.com/rohitchatla/inoutproj-server/tree/master)
