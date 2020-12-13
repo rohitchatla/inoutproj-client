@@ -7,8 +7,13 @@
 * Unskilled works include washing clothes, pick and dropping things, ironing, cleaning houses, gardening and any other small works which don't need any proficiency skill
 * Skilled works include all works(like hairstyling, electrical repairs) which require proficeny skill
 * To become a worker(either skilled or unskilled) different levels of verification will be done based on the work and money that may be generated to the company
-
 ### Functionalities
-*
-*
-*
+* Users can post there work based on type(skilled or unskilled)
+* Workers who are verified users see posted works and can request for willing to work
+* Users then can see the list of workers available for that particular work
+* Of all the workers available user can select a worker based on his skill, rating, cost
+* When user accept a worker the work is assigned
+* After worker completes the work the payment gets done. Rating and skill level gets updated for worker.
+### Unique Features
+* Any user can apply as a worker and different levels of verfication gets done based on the work type.
+* Users can see all available willing workers and can select based on workers rating, cost, skill level.
