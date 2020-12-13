@@ -1,6 +1,6 @@
 # Workify
 
-## Work and get paid, Get your work done when you're busy
+## Work and get paid when you're free, Get work done when you're busy.
 
 ### Overview
 * Workify is web application where users can get there any kind of work (skilled or unskilled) done, and can get paid for doing other users works
