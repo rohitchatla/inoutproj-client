@@ -45,7 +45,7 @@ ReactDOM.render(
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={RequireAuth(Profile)} />
             <Route path="/settings" component={RequireAuth(Settings)} />
-            <Route path="/flashpage" component={flashpage} />
+            <Route path="/flashpage" component={RequireAuth(flashpage)} />
             <Route path="/addwork" component={RequireAuth(addwork)} />
             <Route path="/myworks" component={RequireAuth(myworks)} />
             <Route path="/agentform" component={RequireAuth(agentform)} />

@@ -4,6 +4,8 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 //import axios from "axios";
 import axios from "../../services/Axios";
+import { assestsURL } from "../../services/Axios";
+import StripeCheckout from "react-stripe-checkout";
 
 class WorkDetails extends Component {
   constructor(props) {
@@ -95,11 +97,31 @@ class WorkDetails extends Component {
       .catch(({ response }) => {});
   }
 
+  makePayment = (token) => {
+    const { work } = this.state;
+    const { id } = this.props.match.params;
+    axios
+      .post("/payment", {
+        uid: localStorage.getItem("uid"),
+        token: token,
+        work: work,
+        to: work.agentId,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        alert("Something went wrong.");
+        console.log(err);
+      });
+  };
+
   render() {
     const { work, agent, service, workstatus, status } = this.state;
     return (
       <div>
         <div>
+          <img src={assestsURL + work.photo} />
           <h1 className="display-5">Name: {work.name}</h1>
           <h1 className="display-5">Description: {work.description}</h1>
           <h1 className="display-5">Cost: {work.cost}</h1>
@@ -158,6 +180,18 @@ class WorkDetails extends Component {
           >
             Work Completed
           </button>
+        </div>
+        <div class="card-body">
+          <StripeCheckout
+            // {process.env.REACT_APP_KEY}
+            stripeKey="pk_test_51HxnljJ5CsssC8yKFd4sx8wonMtnqETno4Ea8CcVwdgcznfFU1aPQRlQ03TPXHAlowYBAUUUsWHd8OeZW1V0uvWj00DRfzAVjY"
+            token={this.makePayment}
+            name={work.name}
+            currency="INR"
+            amount={work.cost * 100}
+          >
+            <button className="btn btn-info btn-block">Pay</button>
+          </StripeCheckout>
         </div>
       </div>
     );

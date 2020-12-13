@@ -99,10 +99,31 @@ class Header extends Component {
           >
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
+                <a
+                  className="nav-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://chatrooms-2dbf2.web.app/"
+                >
+                  Workify Chatrooms
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://cvrrvidrooms.herokuapp.com/"
+                >
+                  Workify Vidrooms
+                </a>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/flashpage">
                   Services
                 </Link>
               </li>
+
               <li className="nav-item">
                 <a
                   className="nav-link"
