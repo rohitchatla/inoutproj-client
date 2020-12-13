@@ -2,10 +2,10 @@ import React from "react";
 
 import { Col, Panel } from "react-bootstrap";
 import "./work.style.less";
-import assestsURL from "../services/Axios";
+import { assestsURL } from "../services/Axios";
+
 function Work(props) {
   let { work } = props;
-
   return (
     <Col lg={3} md={4} sm={6}>
       <Panel className="product">
