@@ -21,7 +21,7 @@ export function signinUser({ email, password }, historyPush, historyReplace) {
       .post(`/signin`, { email, password }) // axios returns a promise
       .then((response) => {
         // If request is good (sign in succeeded) ...
-
+        //console.log(response);
         // - Save the JWT token (use local storage)
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("uid", response.data.id);
@@ -34,9 +34,9 @@ export function signinUser({ email, password }, historyPush, historyReplace) {
         // - Redirect (PUSH) to the route '/flashpage'
         historyPush("/flashpage");
       })
-      .catch(() => {
+      .catch((e) => {
         // If request is bad (sign in failed) ...
-
+        console.log(e);
         // - Redirect (REPLACE) to the route '/signin', then show an error to the user
         historyReplace("/signin", {
           time: new Date().toLocaleString(),

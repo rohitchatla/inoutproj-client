@@ -6,6 +6,17 @@ import { connect } from "react-redux";
 import axios from "../../services/Axios";
 import { assestsURL } from "../../services/Axios";
 import StripeCheckout from "react-stripe-checkout";
+import "./style.css";
+
+import io from "socket.io-client";
+import { socketCon } from "../../services/Axios";
+
+const socket = io(socketCon, {
+  "force new connection": true,
+  reconnectionAttempts: "Infinity",
+  timeout: 10001,
+  transports: ["websocket"],
+});
 
 class WorkDetails extends Component {
   constructor(props) {
@@ -16,19 +27,82 @@ class WorkDetails extends Component {
       agent: {},
       status: {},
       workstatus: {},
+      role: "",
+      cstatus: "",
+      cworkstatus: "",
+      fagentid: "",
+      youarefagent: false,
     };
   }
-  async componentDidMount() {
-    const { work, service } = this.state;
+
+  async refreshFunc() {
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     await axios
       .get(`/work/${id}`) // axios returns a promise
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         this.setState({ work: response.data });
         this.setState({ agent: response.data.agentId });
         this.setState({ status: response.data.status[0] });
         this.setState({ workstatus: response.data.workstatus[0] });
+        this.setState({ cstatus: response.data.currentstatus });
+        this.setState({ cworkstatus: response.data.currentworkstatus });
+        this.setState({ fagentid: response.data.fagentid });
+        if (work.finalagentId == localStorage.getItem("uid")) {
+          this.setState({ youarefagent: true });
+        } else {
+          this.setState({ youarefagent: false });
+        }
+      })
+      .catch(({ response }) => {});
+  }
+
+  async componentDidMount() {
+    //socket.emit("getuploadstatus", { cid: cid });
+    // socket.on("init", (i) => {});
+
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
+    const { id } = this.props.match.params;
+    await axios
+      .get(`/work/${id}`) // axios returns a promise
+      .then((response) => {
+        //console.log(response);
+        this.setState({ work: response.data });
+        this.setState({ agent: response.data.agentId });
+        this.setState({ status: response.data.status[0] });
+        this.setState({ workstatus: response.data.workstatus[0] });
+        this.setState({ cstatus: response.data.currentstatus });
+        this.setState({ cworkstatus: response.data.currentworkstatus });
+        this.setState({ fagentid: response.data.fagentid });
+
+        if (work.finalagentId == localStorage.getItem("uid")) {
+          this.setState({ youarefagent: true });
+        } else {
+          this.setState({ youarefagent: false });
+        }
 
         axios
           .get(`/serviceid2service/${response.data.serviceId}`) // axios returns a promise
@@ -39,10 +113,50 @@ class WorkDetails extends Component {
           .catch(({ response }) => {});
       })
       .catch(({ response }) => {});
+
+    await axios
+      .get(`/profile/${localStorage.getItem("uid")}`) // axios returns a promise
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.user && response.data.user.isAgent) {
+          this.setState({ role: "agent" });
+        } else {
+          this.setState({ role: "cust" });
+        }
+      })
+      .catch(({ response }) => {});
+
+    socket.emit("init", { uid: localStorage.getItem("uid") });
+
+    socket.on("refresh", (payload) => {
+      if (payload.work.userId == localStorage.getItem("uid")) {
+        this.refreshFunc();
+      } else if (payload.work.finalagentId == localStorage.getItem("uid")) {
+        this.refreshFunc();
+      } else {
+        let work = payload.work;
+        const exists = (agent_id) => agent_id == localStorage.getItem("uid");
+        if (work.agentId.some(exists)) {
+          this.refreshFunc();
+        }
+      }
+    });
   }
 
   handleTakeJob() {
-    const { work } = this.state;
+    //agent routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     axios
       .post(`/work/status/agentrequested`, {
@@ -50,27 +164,54 @@ class WorkDetails extends Component {
         agentid: localStorage.getItem("uid"),
       }) // axios returns a promise
       .then((response) => {
-        window.location.reload();
+        //console.log(work);
+        socket.emit("agenttake", { work: work });
+        //window.location.reload();
       })
       .catch(({ response }) => {});
   }
 
-  handleAcceptJob() {
-    const { work } = this.state;
+  handleAcceptJob(fagentid) {
+    //cust routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     axios
       .post(`/work/status/custaccepted`, {
         wid: id,
+        fagentid,
         custid: localStorage.getItem("uid"),
       }) // axios returns a promise
       .then((response) => {
-        window.location.reload();
+        socket.emit("custacceptjob", { work: work, fagentid: fagentid });
+        //window.location.reload();
       })
       .catch(({ response }) => {});
   }
 
   handleReject() {
-    const { work } = this.state;
+    //cust routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     axios
       .post(`/work/status/custrejected`, {
@@ -78,13 +219,53 @@ class WorkDetails extends Component {
         custid: localStorage.getItem("uid"),
       }) // axios returns a promise
       .then((response) => {
-        window.location.reload();
+        socket.emit("custrejectjob", { work: work, fagentid: fagentid });
+        //window.location.reload();
+      })
+      .catch(({ response }) => {});
+  }
+
+  handleRejectAgent() {
+    //agent routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
+    const { id } = this.props.match.params;
+    axios
+      .post(`/work/status/agentrejected`, {
+        wid: id,
+        custid: localStorage.getItem("uid"),
+      }) // axios returns a promise
+      .then((response) => {
+        socket.emit("agentrejectjob", { work: work });
+        //window.location.reload();
       })
       .catch(({ response }) => {});
   }
 
   handleComplete() {
-    const { work } = this.state;
+    //cust routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     axios
       .post(`/work/status/workdone`, {
@@ -92,13 +273,26 @@ class WorkDetails extends Component {
         custid: localStorage.getItem("uid"),
       }) // axios returns a promise
       .then((response) => {
-        window.location.reload();
+        socket.emit("completedjob", { work: work });
+        //window.location.reload();
       })
       .catch(({ response }) => {});
   }
 
   makePayment = (token) => {
-    const { work } = this.state;
+    //cust routine
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     const { id } = this.props.match.params;
     axios
       .post("/payment", {
@@ -117,70 +311,262 @@ class WorkDetails extends Component {
   };
 
   render() {
-    const { work, agent, service, workstatus, status } = this.state;
+    const {
+      work,
+      service,
+      agent,
+      status,
+      workstatus,
+      role,
+      cstatus,
+      cworkstatus,
+      fagentid,
+      youarefagent,
+    } = this.state;
     return (
       <div>
         <div>
           <img src={assestsURL + work.photo} />
-          <h1 className="display-5">Name: {work.name}</h1>
+          <h1 className="xtreame">Name: {work.name}</h1>
           <h1 className="display-5">Description: {work.description}</h1>
           <h1 className="display-5">Cost: {work.cost}</h1>
           <h1 className="display-5">Service: {service.name}</h1>
-          <button
-            className="btn btn-warning"
-            onClick={() => this.handleTakeJob()}
-          >
-            Take Job
-          </button>
-        </div>
-        <br />
-        <h2>AgentDetails</h2>
-        <br />
-        {agent && (
-          <div>
-            <p>{agent.firstName}</p>
-            <p>{agent.lastName}</p>
-            <p>{agent.email}</p>
-            <p>{agent.occupation}</p>
-            <p>{agent.skills}</p>
+          {role == "agent" ? (
             <button
-              className="btn btn-success"
-              onClick={() => this.handleAcceptJob()}
+              className="btn btn-warning"
+              onClick={() => this.handleTakeJob()}
             >
-              Accept Job
+              Take Job
             </button>
+          ) : (
+            ""
+          )}
+        </div>
+
+        {role == "cust" ? (
+          <div>
+            <h2>AgentDetails</h2>
+            <br />
+            {agent.length > 0 &&
+              agent.map((agent) => {
+                <div>
+                  <p>{agent.firstName}</p>
+                  <p>{agent.lastName}</p>
+                  <p>{agent.email}</p>
+                  <p>{agent.occupation}</p>
+                  <p>{agent.skills}</p>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => this.handleAcceptJob(agent._id)}
+                  >
+                    Accept Job
+                  </button>
+                </div>;
+              })}
           </div>
+        ) : (
+          ""
         )}
-        <br />
-        <br />
-        <br />
-        <br />
+
         <div>
           <h1 className="display-5">Status:</h1>
           {status && (
             <div>
-              {status.customerAccepted && (
-                <div>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => this.handleReject()}
-                  >
-                    Decline
-                  </button>
-                </div>
-              )}
+              {status.customerRequested &&
+                (role == "cust" ? (
+                  <h5 className="display-7">"You requested/posted a Work"</h5>
+                ) : (
+                  //role==agent
+                  <h5 className="display-7">"Customer posted a new Work"</h5>
+                ))}
+              {status.agentRequested &&
+                (role == "cust" ? (
+                  <h5 className="display-7">
+                    Found few Agents(Agent found your work Interesting)
+                  </h5>
+                ) : (
+                  <h5 className="display-7">
+                    You just requested for this Work)
+                  </h5>
+                ))}
+
+              {status.customerAccepted &&
+                (role == "cust" ? (
+                  <h5 className="display-7">
+                    "You Accepted an Agent for your work"
+                  </h5>
+                ) : (
+                  <h5 className="display-7">
+                    "Customer Accepted an Agent for work"
+                  </h5>
+                ))}
+              {status.customerCancelled &&
+                (role == "cust" ? (
+                  <h5 className="display-7">"You cancelled the work"</h5>
+                ) : (
+                  <h5 className="display-7">"Customer cancelled the work"</h5>
+                ))}
+              {status.agentCancelled &&
+                (role == "cust" ? (
+                  <h5 className="display-7">"Agent cancelled the work"</h5>
+                ) : (
+                  <h5 className="display-7">"You cancelled the work"</h5>
+                ))}
+
+              {status.workDone &&
+                (role == "cust" ? (
+                  <h5 className="display-7">Workdone</h5>
+                ) : (
+                  <h5 className="display-7">Workdone</h5>
+                ))}
             </div>
           )}
         </div>
-        <br />
+
+        {/* <div>
+          <h1 className="display-5">Current-Status:</h1>
+          {cstatus == "custrequested" &&
+            (role == "cust" ? (
+              <h5 className="display-7">You requested/posted a Work</h5>
+            ) : (
+              //role==agent
+              <h5 className="display-7">"Customer posted a new Work"</h5>
+            ))}
+          {cstatus ==
+            "agentrequested"(
+              role == "cust" ? (
+                <h5 className="display-7">
+                  Found few Agents(Agent found your work Interesting)
+                </h5>
+              ) : (
+                <h5 className="display-7">You just requested for this Work</h5>
+              )
+            )}
+          {cstatus ==
+            "custaccepted"(
+              role == "cust" ? (
+                <h5 className="display-7">
+                  "You Accepted an Agent for your work"
+                </h5>
+              ) : (
+                <h5 className="display-7">
+                  "Customer Accepted an Agent for work"
+                </h5>
+              )
+            )}
+
+          {cstatus ==
+            "custcancelled"(
+              role == "cust" ? (
+                <h5 className="display-7">"You cancelled the work"</h5>
+              ) : (
+                <h5 className="display-7">"Customer cancelled the work"</h5>
+              )
+            )}
+          {cstatus ==
+            "agentcancelled"(
+              role == "cust" ? (
+                <h5 className="display-7">"Agent cancelled the work"</h5>
+              ) : (
+                <h5 className="display-7">"You cancelled the work"</h5>
+              )
+            )}
+
+          {cstatus ==
+            "workdone"(
+              role == "cust" ? (
+                <h5 className="display-7">WorkDone</h5>
+              ) : (
+                <h5 className="display-7">WorkDone</h5>
+              )
+            )}
+        </div> */}
+
         <div>
-          <button
-            className="btn btn-success"
-            onClick={() => this.handleComplete()}
-          >
-            Work Completed
-          </button>
+          <h1>Work Status</h1>
+          {workstatus.workOngoing &&
+            (role == "cust" ? (
+              <h5 className="display-7">Work Ongoing</h5>
+            ) : (
+              <h5 className="display-7">Work Ongoing</h5>
+            ))}
+          {workstatus.workCancelled &&
+            (role == "cust" ? (
+              <h5 className="display-7">Work Cancelled</h5>
+            ) : (
+              <h5 className="display-7">Work Cancelled</h5>
+            ))}
+          {workstatus.workCompleted &&
+            (role == "cust" ? (
+              <h5 className="display-7">Work Completed</h5>
+            ) : (
+              <h5 className="display-7">Work Completed</h5>
+            ))}
         </div>
+
+        {/* <div>
+          <h1>Work Current - Status</h1>
+          {cworkstatus ==
+            "ongoing"(
+              role == "cust" ? (
+                <h5 className="display-7">Work Ongoing</h5>
+              ) : (
+                <h5 className="display-7">Work Ongoing</h5>
+              )
+            )}
+          {cworkstatus ==
+            "workcancelled"(
+              role == "cust" ? (
+                <h5 className="display-7">Work Cancelled</h5>
+              ) : (
+                <h5 className="display-7">Work Cancelled</h5>
+              )
+            )}
+          {cworkstatus ==
+            "workdone"(
+              role == "cust" ? (
+                <h5 className="display-7">Work Completed</h5>
+              ) : (
+                <h5 className="display-7">Work Completed</h5>
+              )
+            )}
+        </div> */}
+
+        {status.customerAccepted &&
+          (role == "cust" ? (
+            <div>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.handleReject()}
+              >
+                Decline
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.handleRejectAgent()}
+              >
+                Decline
+              </button>
+            </div>
+          ))}
+
+        {status.customerAccepted &&
+          (role == "cust" ? (
+            <div>
+              <button
+                className="btn btn-success"
+                onClick={() => this.handleComplete()}
+              >
+                Work Completed
+              </button>
+            </div>
+          ) : (
+            ""
+          ))}
+
         <div class="card-body">
           <StripeCheckout
             // {process.env.REACT_APP_KEY}
@@ -190,7 +576,7 @@ class WorkDetails extends Component {
             currency="INR"
             amount={work.cost * 100}
           >
-            <button className="btn btn-info btn-block">Pay</button>
+            <button className="btn btn-info">Pay</button>
           </StripeCheckout>
         </div>
       </div>

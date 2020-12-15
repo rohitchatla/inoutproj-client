@@ -15,7 +15,7 @@ class PostList extends Component {
     axios
       .get(`getservices`) // axios returns a promise
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         this.setState({ services: response.data });
       })
       .catch(({ response }) => {});

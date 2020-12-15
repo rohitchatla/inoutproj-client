@@ -38,6 +38,7 @@ class addWork extends Component {
     dataform.append("cost", cost);
     dataform.append("serviceId", serviceId);
     dataform.append("file", file);
+    dataform.append("postedBy", "cust");
     // let obj = {
     //   uid,
     //   name,

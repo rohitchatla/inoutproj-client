@@ -19,7 +19,7 @@ import addwork from "./components/works/addwork";
 import myworks from "./components/myworks/myworks";
 import agentform from "./components/agent/agentform";
 import workdetails from "./components/works/workdetails";
-
+import agentWorksDone from "./components/agent/agentworksdone";
 import reducers from "./reducers";
 import { AUTH_USER } from "./actions/types";
 
@@ -48,6 +48,10 @@ ReactDOM.render(
             <Route path="/flashpage" component={RequireAuth(flashpage)} />
             <Route path="/addwork" component={RequireAuth(addwork)} />
             <Route path="/myworks" component={RequireAuth(myworks)} />
+            <Route
+              path="/agentworksdone"
+              component={RequireAuth(agentWorksDone)}
+            />
             <Route path="/agentform" component={RequireAuth(agentform)} />
             <Route
               path="/workdetails/:id"

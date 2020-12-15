@@ -26,8 +26,17 @@ class Header extends Component {
             {this.props.username}
           </a>
           <div className="dropdown-menu" aria-labelledby="dropdown02">
-            <Link className="dropdown-item" to="/my_posts">
-              Your Posts
+            <Link className="dropdown-item" to="/addwork">
+              Add Work
+            </Link>
+            <Link className="dropdown-item" to="/myworks">
+              My Works posted
+            </Link>
+            <Link className="dropdown-item" to="/agentworksdone">
+              My Works done
+            </Link>
+            <Link className="dropdown-item" to="/agentform">
+              Apply tobe agent
             </Link>
             <Link className="dropdown-item" to="/profile">
               Your Profile
@@ -35,15 +44,6 @@ class Header extends Component {
             <div className="dropdown-divider" />
             <Link className="dropdown-item" to="/settings">
               Settings
-            </Link>
-            <Link className="dropdown-item" to="/addwork">
-              Add Work
-            </Link>
-            <Link className="dropdown-item" to="/myworks">
-              My Works
-            </Link>
-            <Link className="dropdown-item" to="/agentform">
-              Apply tobe agent
             </Link>
             <Link
               className="dropdown-item"
