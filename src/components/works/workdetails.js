@@ -8,7 +8,8 @@ import { assestsURL } from "../../services/Axios";
 import StripeCheckout from "react-stripe-checkout";
 import "./style.css";
 
-import io from "socket.io-client";
+//import io from "socket.io-client";
+import io from "socket.io-client/dist/socket.io.js";
 import { socketCon } from "../../services/Axios";
 
 const socket = io(socketCon, {
