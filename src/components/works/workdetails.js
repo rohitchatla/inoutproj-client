@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import axios from "../../services/Axios";
 import { assestsURL } from "../../services/Axios";
 import StripeCheckout from "react-stripe-checkout";
+import "./style.css";
 
 class WorkDetails extends Component {
   constructor(props) {
@@ -122,10 +123,10 @@ class WorkDetails extends Component {
       <div>
         <div>
           <img src={assestsURL + work.photo} />
-          <h1 className="display-5">Name: {work.name}</h1>
-          <h1 className="display-5">Description: {work.description}</h1>
-          <h1 className="display-5">Cost: {work.cost}</h1>
-          <h1 className="display-5">Service: {service.name}</h1>
+          <h1 className="display-6">Name: {work.name}</h1>
+          <h1 className="display-6">Description: {work.description}</h1>
+          <h1 className="display-6">Cost: {work.cost}</h1>
+          <h1 className="display-6">Service: {service.name}</h1>
           <button
             className="btn btn-warning"
             onClick={() => this.handleTakeJob()}

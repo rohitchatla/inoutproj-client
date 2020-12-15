@@ -12,7 +12,7 @@ class addWork extends Component {
       name: "",
       description: "",
       cost: "",
-      serviceId: "",
+      serviceId: "5fd62041823fd06e7263e392",
       services: [],
       file: "",
     };
@@ -139,7 +139,7 @@ class addWork extends Component {
             this.setState({ [e.target.name]: e.target.value });
           }}
         >
-          <option value="ss">Default</option>
+          {/* <option value="5fd62041823fd06e7263e392">Default</option> */}
           {this.state.services &&
             this.state.services.map((se) => {
               return <option value={se._id}>{se.name}</option>;
