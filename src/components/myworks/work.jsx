@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Col, Panel } from "react-bootstrap";
-
+import { assestsURL } from "../../services/Axios";
 function Work(props) {
   let { work } = props;
 
@@ -15,7 +15,7 @@ function Work(props) {
             className="img-responsive product-img"
             //src={`data:image/jpeg;base64,${work.photo}`}
             //src={"/api/work/" + work._id}
-            src={"http://localhost:5000/assets/" + work.photo}
+            src={assestsURL + work.photo}
           />
           {/* </a> */}
         </div>
