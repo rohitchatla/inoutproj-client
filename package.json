@@ -11,7 +11,7 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
-    "react-scripts": "1.0.13",
+    "react-scripts": "^4.0.1",
     "react-stripe-checkout": "^2.6.3",
     "redux": "^3.7.1",
     "redux-form": "^7.4.3",
@@ -30,5 +30,17 @@
     "less": "^3.13.0",
     "less-loader": "^7.1.0",
     "style-loader": "^2.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
