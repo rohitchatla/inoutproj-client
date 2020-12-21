@@ -60,6 +60,16 @@ class Signup extends Component {
     return (
       <div>
         {this.renderAlert()}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <form
           className="form-signin"
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
