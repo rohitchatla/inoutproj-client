@@ -32,7 +32,7 @@ export function signinUser({ email, password }, historyPush, historyReplace) {
         });
 
         // - Redirect (PUSH) to the route '/flashpage'
-        historyPush("/flashpage");
+        historyPush("/");
       })
       .catch((e) => {
         // If request is bad (sign in failed) ...
@@ -131,29 +131,43 @@ export function updateProfile(
     address,
     occupation,
     description,
+    image,
   },
   historyReplace
 ) {
   return function (dispatch) {
+    // {
+    //   // req.body (2nd parameter)
+    //   firstName,
+    //   lastName,
+    //   birthday,
+    //   sex,
+    //   phone,
+    //   address,
+    //   occupation,
+    //   description,
+    //   image,
+    // }
+    const dataform = new FormData();
+
+    dataform.append("firstName", firstName);
+    dataform.append("lastName", lastName);
+    dataform.append("birthday", birthday);
+    dataform.append("sex", sex);
+    dataform.append("phone", phone);
+    dataform.append("address", address);
+    dataform.append("occupation", occupation);
+    dataform.append("description", description);
+    dataform.append("image", image);
     axios
-      .put(
-        `/profile`,
-        {
-          // req.body (2nd parameter)
-          firstName,
-          lastName,
-          birthday,
-          sex,
-          phone,
-          address,
-          occupation,
-          description,
-        },
-        {
-          // header (3rd parameter)
-          headers: { authorization: localStorage.getItem("token") }, // require auth
-        }
-      )
+      .put(`/profile`, dataform, {
+        // header (3rd parameter)
+
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: localStorage.getItem("token"),
+        }, // require auth
+      })
       .then((response) => {
         // Update profile success
         // - Update profile

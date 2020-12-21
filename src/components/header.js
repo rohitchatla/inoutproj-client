@@ -32,16 +32,32 @@ class Header extends Component {
             <Link className="dropdown-item" to="/myworks">
               My Works posted
             </Link>
+            <div className="dropdown-divider" />
             <Link className="dropdown-item" to="/agentworksdone">
               My Works done
             </Link>
+            <div className="dropdown-divider" />
             <Link className="dropdown-item" to="/agentform">
               Apply tobe agent
+            </Link>
+            <div className="dropdown-divider" />
+            <Link className="dropdown-item" to="/transactions">
+              Your Transactions
             </Link>
             <Link className="dropdown-item" to="/profile">
               Your Profile
             </Link>
+            <Link className="dropdown-item" to="/allprofiles">
+              All Profiles
+            </Link>
             <div className="dropdown-divider" />
+            {console.log(this.props)}
+            {!this.props.isAgent && (
+              <Link className="dropdown-item" to="/feedback">
+                Feedbacks
+              </Link>
+            )}
+
             <Link className="dropdown-item" to="/settings">
               Settings
             </Link>
@@ -125,6 +141,12 @@ class Header extends Component {
               </li>
 
               <li className="nav-item">
+                <Link className="nav-link" to="/works">
+                  Works
+                </Link>
+              </li>
+
+              <li className="nav-item">
                 <a
                   className="nav-link"
                   target="_blank"
@@ -139,7 +161,7 @@ class Header extends Component {
               <input
                 className="form-control mr-sm-2"
                 type="text"
-                placeholder="Search Post"
+                placeholder="Search Work"
               />
               <button
                 className="btn btn-outline-success my-2 my-sm-0"

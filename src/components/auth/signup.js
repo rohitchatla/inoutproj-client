@@ -7,7 +7,7 @@ class Signup extends Component {
   componentWillMount() {
     if (this.props.authenticated) {
       // if the user already signed in, navigate to '/posts'
-      this.props.history.replace("/flashpage");
+      this.props.history.replace("/");
     }
   }
 

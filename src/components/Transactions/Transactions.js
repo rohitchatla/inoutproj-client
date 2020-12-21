@@ -1,7 +1,7 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 import "./Transactions.css";
-import Axios from "../../services/Axios";
+import axios from "../../services/Axios";
 
 class previoustransaction extends React.Component {
   constructor(props) {
@@ -25,7 +25,8 @@ class previoustransaction extends React.Component {
   }
 
   componentDidMount(prevProps) {
-    Axios.get(`/api/payment/trans/${localStorage.getItem("uid")}`)
+    axios
+      .get(`payment/trans/${localStorage.getItem("uid")}`)
       .then(({ data }) => {
         console.log(data.length);
         this.setState({ boxdata: data });
@@ -36,10 +37,7 @@ class previoustransaction extends React.Component {
   render() {
     return (
       <div className="paymentIt">
-        <div className="pay">
-          <h3 id="fontIt">Payments & Actions</h3>
-        </div>
-        <h3 id="fontIt">Previous Transaction</h3>
+        <h3 id="fontIt">Previous Transactions</h3>
         <div className="row">
           <div className={`${this.state.showComponent ? "col-6" : "col-12"}`}>
             <table className="table adjustIt">

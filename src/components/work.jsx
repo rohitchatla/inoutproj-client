@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Col, Panel } from "react-bootstrap";
+import { Col, Panel } from "react-bootstrap"; //old version(Col, Panel is present)
 import "./work.style.less";
 import { assestsURL } from "../services/Axios";
 

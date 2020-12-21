@@ -4,6 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 //import axios from "axios";
 import axios from "../../services/Axios";
+import { assestsURL } from "../../services/Axios";
 
 class agentform extends Component {
   constructor(props) {
@@ -16,9 +17,22 @@ class agentform extends Component {
       occupation: [],
       birthday: "",
       skills: "",
+      image: "",
+      b64url: "",
+      aadharcard: "",
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    const { aadharcard } = this.state;
+    axios
+      .get(`/profile`, {
+        headers: { authorization: localStorage.getItem("token") },
+      })
+      .then((response) => {
+        console.log(response.data.user);
+        this.setState({ aadharcard: response.data.user.aadharcard });
+      });
+  }
 
   handleSubmit() {
     const {
@@ -29,23 +43,40 @@ class agentform extends Component {
       occupation,
       birthday,
       skills,
+      image,
+      b64url,
     } = this.state;
     const uid = localStorage.getItem("uid");
 
-    let obj = {
-      uid,
-      phno,
-      sex,
-      description,
-      address,
-      occupation,
-      birthday,
-      skills,
-    };
+    // let obj = {
+    //   uid,
+    //   phno,
+    //   sex,
+    //   description,
+    //   address,
+    //   occupation,
+    //   birthday,
+    //   skills,
+    //   b64url, //.substring(b64url.indexOf(",") + 1),
+    // };
+
+    const dataform = new FormData();
+
+    dataform.append("uid", uid);
+    dataform.append("phno", phno);
+    dataform.append("birthday", birthday);
+    dataform.append("sex", sex);
+    dataform.append("skills", skills);
+    dataform.append("address", address);
+    dataform.append("occupation", occupation);
+    dataform.append("description", description);
+    dataform.append("image", image);
+    dataform.append("b64url", b64url);
+
     axios
-      .post("/agent/update", obj, {
+      .post("/agent/update", dataform, {
         headers: {
-          //"Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           //"x-access-token": `${localStorage.getItem("token")}`,
         },
       }) // axios returns a promise
@@ -69,11 +100,61 @@ class agentform extends Component {
     }
   }
 
+  getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  }
+
   render() {
+    const { b64url, image, aadharcard } = this.state;
     return (
       <div className="post">
         <h2 className="mb-5">Agent's Application</h2>
         {/* <form onSubmit={this.handleSubmit()}> */}
+        <br />
+        <br />
+        <img
+          alt={""}
+          className="img-responsive product-img"
+          src={assestsURL + aadharcard}
+          width="250px"
+          height="200px"
+        />
+        <br />
+        <br />
+        {"Image"}
+        <br />
+        <br />
+        <input
+          accept="image/*"
+          onChange={(e) => {
+            let idCardBase64 = "";
+            this.getBase64(e.target.files[0], (result) => {
+              idCardBase64 = result;
+              this.setState({ b64url: result });
+            });
+
+            this.setState({ image: e.target.files[0] });
+
+            // axios
+            //   .post(`https://inout-mldl-pack.herokuapp.com/aadhar_ocr`, {
+            //     text: "aadhar.jpg",
+            //     payload: b64url.substring(b64url.indexOf(",") + 1),
+            //   })
+            //   .then((response) => {
+            //     console.log(response);//cors issue
+            //   });
+          }}
+          type="file"
+        />
+        <br />
+        <br />
         <label>{"BirthDay"}</label>
         <input
           name="birthday"

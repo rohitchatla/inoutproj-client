@@ -105,47 +105,42 @@ class PostList extends Component {
       //   </body>
       // </html>
       <div>
-        <h1>Services</h1>
-        {this.state.services &&
-          this.state.services.map((service) => {
-            return (
-              <div className="hexagon-menu clear">
-                <div className="hexagon-item">
-                  <div className="hex-item">
-                    <div />
-                    <div />
-                    <div />
-                  </div>
-
-                  <div className="hex-item">
-                    <div />
-                    <div />
-                    <div />
-                  </div>
-                  <a href="#" className="hex-content">
-                    <span className="hex-content-inner">
-                      <span className="icon">
-                        <i className="fa fa-universal-access" />
-                      </span>
-                      <span className="title">{service.name}</span>
-                    </span>
-                    <svg
-                      viewBox="0 0 173.20508075688772 200"
-                      height={200}
-                      width={174}
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
-                        fill="#1e2530"
-                      />
-                    </svg>
-                  </a>
+        <h1>Services :: </h1>
+        <br />
+        <br />
+        <br />
+        <br />
+        <section className="block relative z-1 bg-gray-700">
+          <div className="container mx-auto">
+            <div className="justify-center flex flex-wrap">
+              <div className="w-full lg:w-12/12 px-4  -mt-24">
+                <div className="flex flex-wrap">
+                  {this.state.services &&
+                    this.state.services.map((service) => {
+                      return (
+                        <div className="w-full lg:w-4/12 px-4">
+                          <Link to="#">
+                            <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                              <span>{service.name}</span>
+                              <img
+                                alt="..."
+                                className="align-middle border-none max-w-full h-auto rounded-lg"
+                                src={
+                                  service.img_url
+                                    ? service.img_url
+                                    : "https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+                                }
+                              />
+                            </div>
+                          </Link>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
-            );
-          })}
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

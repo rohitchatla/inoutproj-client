@@ -24,10 +24,10 @@ class WorkDetails extends Component {
     super(props);
     this.state = {
       work: [],
-      service: {},
-      agent: {},
-      status: {},
-      workstatus: {},
+      service: "",
+      agent: [],
+      status: [],
+      workstatus: [],
       role: "",
       cstatus: "",
       cworkstatus: "",
@@ -53,9 +53,10 @@ class WorkDetails extends Component {
     await axios
       .get(`/work/${id}`) // axios returns a promise
       .then((response) => {
-        //console.log(response);
+        console.log(response);
+        let agentdetails = response.data.agentId;
         this.setState({ work: response.data });
-        this.setState({ agent: response.data.agentId });
+        this.setState({ agent: agentdetails });
         this.setState({ status: response.data.status[0] });
         this.setState({ workstatus: response.data.workstatus[0] });
         this.setState({ cstatus: response.data.currentstatus });
@@ -91,8 +92,9 @@ class WorkDetails extends Component {
       .get(`/work/${id}`) // axios returns a promise
       .then((response) => {
         //console.log(response);
+        let agentdetails = response.data.agentId;
         this.setState({ work: response.data });
-        this.setState({ agent: response.data.agentId });
+        this.setState({ agent: agentdetails });
         this.setState({ status: response.data.status[0] });
         this.setState({ workstatus: response.data.workstatus[0] });
         this.setState({ cstatus: response.data.currentstatus });
@@ -116,7 +118,9 @@ class WorkDetails extends Component {
       .catch(({ response }) => {});
 
     await axios
-      .get(`/profile/${localStorage.getItem("uid")}`) // axios returns a promise
+      .get(`/profile/${localStorage.getItem("uid")}`, {
+        headers: { authorization: localStorage.getItem("token") },
+      }) // axios returns a promise
       .then((response) => {
         console.log(response.data);
         if (response.data.user && response.data.user.isAgent) {
@@ -166,7 +170,10 @@ class WorkDetails extends Component {
       }) // axios returns a promise
       .then((response) => {
         //console.log(work);
-        socket.emit("agenttake", { work: work });
+        socket.emit("agenttake", {
+          work: work,
+          agentid: localStorage.getItem("uid"),
+        });
         //window.location.reload();
       })
       .catch(({ response }) => {});
@@ -311,6 +318,29 @@ class WorkDetails extends Component {
       });
   };
 
+  feedback = (work) => {
+    let fagentID = work.finalagentId;
+    let custID = localStorage.getItem("uid"); //feedback is given by customer only-->(so your id)
+
+    let feedbackText = prompt("How was the work");
+    let ratingForWork = prompt("How would you rate (out of /5)");
+    axios
+      .post("/feedback", {
+        fagentID: fagentID,
+        custID: custID,
+        workID: work._id,
+        feedbackText: feedbackText,
+        ratingForWork: ratingForWork,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        alert("Something went wrong.");
+        console.log(err);
+      });
+  };
+
   render() {
     const {
       work,
@@ -332,6 +362,7 @@ class WorkDetails extends Component {
           <h1 className="display-5">Description: {work.description}</h1>
           <h1 className="display-5">Cost: {work.cost}</h1>
           <h1 className="display-5">Service: {service.name}</h1>
+
           {role == "agent" ? (
             <button
               className="btn btn-warning"
@@ -345,24 +376,26 @@ class WorkDetails extends Component {
         </div>
 
         {role == "cust" ? (
-          <div>
+          <div id="agent">
             <h2>AgentDetails</h2>
             <br />
             {agent.length > 0 &&
               agent.map((agent) => {
-                <div>
-                  <p>{agent.firstName}</p>
-                  <p>{agent.lastName}</p>
-                  <p>{agent.email}</p>
-                  <p>{agent.occupation}</p>
-                  <p>{agent.skills}</p>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => this.handleAcceptJob(agent._id)}
-                  >
-                    Accept Job
-                  </button>
-                </div>;
+                return (
+                  <div>
+                    <p>{agent.firstName}</p>
+                    <p>{agent.lastName}</p>
+                    <p>{agent.email}</p>
+                    <p>{agent.occupation}</p>
+                    <p>{agent.skills}</p>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => this.handleAcceptJob(agent._id)}
+                    >
+                      Accept Job
+                    </button>
+                  </div>
+                );
               })}
           </div>
         ) : (
@@ -499,7 +532,15 @@ class WorkDetails extends Component {
             ))}
           {workstatus.workCompleted &&
             (role == "cust" ? (
-              <h5 className="display-7">Work Completed</h5>
+              <div>
+                <h5 className="display-7">Work Completed</h5>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => this.feedback(work)}
+                >
+                  Feedback
+                </button>
+              </div>
             ) : (
               <h5 className="display-7">Work Completed</h5>
             ))}
