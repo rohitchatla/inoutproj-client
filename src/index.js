@@ -66,7 +66,7 @@ ReactDOM.render(
             <Route path="/allprofiles" component={allProfiles} />
             <Route path="/profiledetails/:id" component={profileDetails} />
             <Route path="/settings" component={RequireAuth(Settings)} />
-            <Route path="/flashpage" component={RequireAuth(flashpage)} />
+            <Route path="/flashpage" component={flashpage} />
             <Route path="/feedback" component={RequireAuth(Feedback)} />
             <Route path="/addwork" component={RequireAuth(addwork)} />
             <Route path="/myworks" component={RequireAuth(myworks)} />
