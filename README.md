@@ -28,4 +28,6 @@
 
 - Primarily MERN stack
 
+### DeepLearning & MachineLearning(OCR and Computer Vision) custom routines util api is [here](https://github.com/rohitchatla/inout-ml-dl-pack/tree/master)
 ### This is frontend repo of our web app.[backend repo is Here](https://github.com/rohitchatla/inoutproj-server/tree/master)
+
