@@ -33,6 +33,13 @@ export default function Index() {
                 >
                   Github
                 </a>
+                <a
+                  href="https://devfolio.co/submissions/workify-3"
+                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  target="_blank"
+                >
+                  Inout 7.0 Submissions
+                </a>
               </div>
             </div>
           </div>
@@ -605,6 +612,13 @@ export default function Index() {
                 >
                   <i className="fab fa-github text-lg mr-1"></i>
                   <span>Help With a Star</span>
+                </a>
+                <a
+                  href="https://devfolio.co/submissions/workify-3"
+                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  target="_blank"
+                >
+                  Inout 7.0 Submissions
                 </a>
               </div>
               <div className="text-center mt-16"></div>
