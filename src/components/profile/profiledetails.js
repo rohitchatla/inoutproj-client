@@ -231,7 +231,7 @@ class profileDetails extends Component {
                             )}
                             {f.sentiment && (
                               <Typography color="textSecondary" gutterBottom>
-                                Sentiment-Confidence(0-1)-
+                                [NLP] Sentiment-Confidence(0-1)-
                                 {f.sentiment.sentiment}
                                 -Rs.
                                 {f.sentiment.confidence}

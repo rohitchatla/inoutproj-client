@@ -322,7 +322,7 @@ class WorkDetails extends Component {
     let fagentID = work.finalagentId;
     let custID = localStorage.getItem("uid"); //feedback is given by customer only-->(so your id)
 
-    let feedbackText = prompt("How was the work");
+    let feedbackText = prompt("How was the work(NLP-Sentiment_Analysis)");
     let ratingForWork = prompt("How would you rate (out of /5)");
     axios
       .post("/feedback", {

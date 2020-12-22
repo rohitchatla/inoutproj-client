@@ -71,7 +71,7 @@ class allProfiles extends Component {
                     {ag.description}
                   </Typography>
                   <Typography color="textSecondary" gutterBottom>
-                    {ag.rating}/5
+                    Global Rating: {ag.rating}/5
                   </Typography>
                 </CardContent>
                 <CardActions>

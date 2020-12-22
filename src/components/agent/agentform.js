@@ -128,7 +128,7 @@ class agentform extends Component {
         />
         <br />
         <br />
-        {"Image"}
+        {"Aadhar Card Image/ OCR (CompVision_Doc_Scanning/DL)"}
         <br />
         <br />
         <input
