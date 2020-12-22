@@ -20,11 +20,11 @@ export default function Index() {
               </p>
               <div className="mt-12">
                 <a
-                  href="#"
-                  //target="_blank"
+                  href="https://github.com/rohitchatla/inoutproj-client/tree/master"
+                  target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Get started
+                  Get started / More
                 </a>
                 <a
                   href="https://github.com/rohitchatla/inoutproj-client/tree/master"
@@ -38,7 +38,18 @@ export default function Index() {
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
                 >
-                  Inout 7.0 Submissions
+                  Inout 7.0 Submission
+                </a>
+                <br />
+                <br />
+                <br />
+                <br />
+                <a
+                  href="https://youtu.be/bIg0HW8p9wQ"
+                  target="_blank"
+                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  YT Demo Vid
                 </a>
               </div>
             </div>
@@ -482,7 +493,7 @@ export default function Index() {
                   <h5 className="text-xl font-semibold pb-4 text-center">
                     Signup
                   </h5>
-                  <Link to="/auth/login">
+                  <Link to="/signup">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
@@ -512,7 +523,7 @@ export default function Index() {
                   <h5 className="text-xl font-semibold pb-4 text-center">
                     Services
                   </h5>
-                  <Link to="/services">
+                  <Link to="/flashpage">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
@@ -593,17 +604,19 @@ export default function Index() {
                   😍
                 </span>
               </p>
-              <h3 className="font-semibold text-3xl">Do you love Workify?</h3>
+              <h3 className="font-semibold text-3xl">
+                Do you love Workify? & For more Contacts --
+              </h3>
               <p className="text-gray-600 text-lg leading-relaxed mt-4 mb-4">
-                Give us a star in our GitHub
+                Give us a star in our GitHub & Contributions in Inout 7.0
               </p>
               <div className="sm:block flex flex-col mt-10">
                 <a
-                  href="#"
-                  //target="_blank"
+                  href="https://github.com/rohitchatla/inoutproj-client/tree/master"
+                  target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Get started
+                  Get started / More
                 </a>
                 <a
                   href="https://github.com/rohitchatla/inoutproj-client/tree/master"
@@ -611,14 +624,25 @@ export default function Index() {
                   className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg"
                 >
                   <i className="fab fa-github text-lg mr-1"></i>
-                  <span>Help With a Star</span>
+                  <span>Help With a Star / GitHub</span>
                 </a>
                 <a
                   href="https://devfolio.co/submissions/workify-3"
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
                 >
-                  Inout 7.0 Submissions
+                  Inout 7.0 Submission
+                </a>
+                <br />
+                <br />
+                <br />
+                <br />
+                <a
+                  href="https://youtu.be/DjgUK7s7RTA"
+                  target="_blank"
+                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  YT Full Demo Vid
                 </a>
               </div>
               <div className="text-center mt-16"></div>
