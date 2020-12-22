@@ -18,6 +18,7 @@
 - When user accept a worker the work is assigned.
 - After worker completes the work the payment gets done. Rating and skill level gets updated for worker.
 - Indigenous chat-engine with Video/Audio calling functionalities for bridging gap between Customers & agent, vice-versa.
+- Custom routines of Computer vision for doc scanning, tessaract-ocr for Aadhar/docs verifications, NLP custom routines using further vote classifier of 5 algos for sentiment analysis of reviews of customer to generate agent's rating
 
 ### Unique Features
 
@@ -26,7 +27,7 @@
 
 ### Tech
 
-- Primarily MERN stack
+- Tech Primarily MERN stack, custom tessaract-ocr model for verification, computer vision for docs scanning, NLP custom routines for sentiment analysis of reviews for agent's ratings.
 
 ### DeepLearning & MachineLearning(OCR and Computer Vision) custom routines util api is [here](https://github.com/rohitchatla/inout-ml-dl-pack/tree/master)
 ### This is frontend repo of our web app.[backend repo is Here](https://github.com/rohitchatla/inoutproj-server/tree/master)
