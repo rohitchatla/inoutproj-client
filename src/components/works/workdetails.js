@@ -281,7 +281,7 @@ class WorkDetails extends Component {
         custid: localStorage.getItem("uid"),
       }) // axios returns a promise
       .then((response) => {
-        socket.emit("completedjob", { work: work });
+        socket.emit("completedjob", { work: work });//fagentid: fagentid
         //window.location.reload();
       })
       .catch(({ response }) => {});

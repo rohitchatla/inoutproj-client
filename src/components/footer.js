@@ -4,7 +4,7 @@ export default () => {
   return (
     <footer className="footer">
       <div className="container">
-        <span className="text-muted">@2020 cvrr</span>
+        <span className="text-muted">@2020 cvrrocket</span>
       </div>
     </footer>
   );

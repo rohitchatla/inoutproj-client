@@ -11,43 +11,39 @@ export default function Index() {
       {/* <IndexNavbar fixed /> */}
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
         <div className="container mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
+          <div className="w-full sm:w-4/12 md:w-8/12 lg:w-6/12 xl:w-8/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">Workify</h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
                 Work and get paid when you're free, Get work done when you're
                 busy. <a href="#" className="text-gray-700" target="_blank"></a>
               </p>
-              <div className="mt-12">
+              <div className="mt-12 sm:block flex flex-col mt-10 md:block flex flex-col mt-10 lg:block flex flex-col mt-10">
                 <a
                   href="https://github.com/rohitchatla/inoutproj-client/tree/master"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="get-started text-white font-bold px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Get started / More
                 </a>
                 <a
                   href="https://github.com/rohitchatla/inoutproj-client/tree/master"
-                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="github-star ml-1 text-white font-bold px-4 py-2 rounded outline-none focus:outline-none mr-4 mb-2 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
                 >
                   Github
                 </a>
                 <a
                   href="https://devfolio.co/submissions/workify-3"
-                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="github-star ml-1 text-white font-bold px-4 py-2 rounded outline-none focus:outline-none mr-4 mb-2 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
                 >
                   Inout 7.0 Submission
                 </a>
-                <br />
-                <br />
-                <br />
-                <br />
                 <a
                   href="https://youtu.be/bIg0HW8p9wQ"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  className="get-started text-white font-bold px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   YT Demo Vid
                 </a>
