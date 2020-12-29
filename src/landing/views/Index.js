@@ -308,7 +308,7 @@ export default function Index() {
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                         src="https://cdn-images-1.medium.com/max/1200/1*iDQvKoz7gGHc6YXqvqWWZQ.png"
                       />
-                      <p className="text-lg text-white mt-4 font-semibold">
+                      <p className="text-sm text-white mt-4 font-semibold">
                         Tensorflow/tessaract/ML/DL
                       </p>
                     </div>
