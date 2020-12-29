@@ -55,6 +55,7 @@ class profileDetails extends Component {
 
   feedback = () => {
     const { id } = this.props.match.params;
+    const { pdetails, feedbacks } = this.state;
     let fagentID = id;
     let custID = localStorage.getItem("uid"); //feedback is given by customer only-->(so your id)
 
@@ -68,8 +69,20 @@ class profileDetails extends Component {
         feedbackText: feedbackText,
         ratingForWork: ratingForWork,
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
+
+        let fe = [...feedbacks];
+        fe.push(res);
+        this.setState({ feedbacks: fe });
+
+        // axios
+        //   .get(`getfeedbacks/${id}`) // axios returns a promise
+        //   .then((response) => {
+        //     console.log(response);
+        //     this.setState({ feedbacks: response.data });
+        //   })
+        //   .catch(({ response }) => {});
       })
       .catch((err) => {
         alert("Something went wrong.");
