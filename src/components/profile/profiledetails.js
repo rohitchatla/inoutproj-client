@@ -72,17 +72,17 @@ class profileDetails extends Component {
       .then(async (res) => {
         console.log(res);
 
-        let fe = [...feedbacks];
-        fe.push(res);
-        this.setState({ feedbacks: fe });
+        // let fe = [...feedbacks];
+        // fe.push(res);
+        // this.setState({ feedbacks: fe });
 
-        // axios
-        //   .get(`getfeedbacks/${id}`) // axios returns a promise
-        //   .then((response) => {
-        //     console.log(response);
-        //     this.setState({ feedbacks: response.data });
-        //   })
-        //   .catch(({ response }) => {});
+        axios
+          .get(`getfeedbacks/${id}`) // axios returns a promise
+          .then((response) => {
+            console.log(response);
+            this.setState({ feedbacks: response.data });
+          })
+          .catch(({ response }) => {});
       })
       .catch((err) => {
         alert("Something went wrong.");
