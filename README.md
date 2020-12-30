@@ -16,7 +16,7 @@
 - Users then can see the list of workers available for that particular work.
 - Of all the workers available user can select a worker based on his skill, rating and cost.
 - When user accept a worker the work is assigned.
-- After worker completes the work the payment gets done. Rating and skill level gets updated for worker, or customer can visit agent profile and can give feedback,rating there
+- After worker completes the work the payment gets done. Rating and skill level gets updated for worker, or customer can visit agent profile and can give feedback,rating there.
 - Indigenous chat-engine with Video/Audio calling functionalities for bridging gap between Customers & agent, vice-versa.
 - Custom routines of Computer vision for doc scanning, tessaract-ocr for Aadhar/docs verifications, NLP custom routines using further vote classifier of 5 algos for sentiment analysis of reviews of customer to generate agent's rating
 
