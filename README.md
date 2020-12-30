@@ -41,7 +41,7 @@
 
 ### Workflow
 <li> Customer requests work and agent accepts it and then customer confirms it.
-<li> After work is completed,the customer pays and then gives comment,rating to the agent.
+<li> After work is completed,the customer pays and then gives comment,rating to the agent/worker.
 <img src="https://github.com/rohitchatla/inoutproj-client/blob/master/Images/30.png">
 <img src="https://github.com/rohitchatla/inoutproj-client/blob/master/Images/25.jpeg">
 <img src="https://github.com/rohitchatla/inoutproj-client/blob/master/Images/26.jpeg">
